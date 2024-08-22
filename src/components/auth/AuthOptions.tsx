@@ -16,7 +16,7 @@ import {
   FormLabel,
   FormMessage,
 } from '../ui/form';
-import { signWithEmailAction } from '~/server/auth';
+import { signWithEmailAction, signWithGithubAction } from '~/server/auth';
 
 import { signEmailSchema as schema } from '~/lib/schemas';
 import { cn } from '~/lib/utils';
@@ -35,14 +35,18 @@ function AuthOptions({ message, type }: Props) {
   });
 
   const handleSubmit = async (data: z.infer<typeof schema>) => {
-    console.log(data);
     await signWithEmailAction(data);
   };
 
   return (
     <div className="flex min-w-96 flex-col items-stretch justify-start gap-y-8">
       <div>
-        <Button className="flex w-full items-center justify-center gap-x-6 bg-[#272b30] text-white hover:bg-[#272b30]/90">
+        <Button
+          className="flex w-full items-center justify-center gap-x-6 bg-[#272b30] text-white hover:bg-[#272b30]/90"
+          onClick={async () => {
+            await signWithGithubAction();
+          }}
+        >
           <FaGithub size={24} />
           <span>Sign in with Github</span>
         </Button>

@@ -8,7 +8,7 @@ async function SingedIn({ children }: Props) {
   const supabase = createClient();
 
   const user = await supabase.auth.getUser();
-  console.log(user.data);
+
   if (!user.data.user) {
     return null;
   }

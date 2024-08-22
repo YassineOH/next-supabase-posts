@@ -9,7 +9,7 @@ async function SignedOut({ children }: Props) {
   const supabase = createClient();
 
   const user = await supabase.auth.getUser();
-  if (user) {
+  if (user.data.user) {
     return null;
   }
 

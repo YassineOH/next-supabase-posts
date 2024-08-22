@@ -1,7 +1,8 @@
 import { redirect } from 'next/navigation';
 import { ReactNode } from 'react';
+import Header from '~/components/Header';
 import { db } from '~/db';
-import { createClient } from '~/utils/supabase/server';
+import { createClient } from '~/lib/supabase/server';
 
 interface Props {
   children: ReactNode;
@@ -25,11 +26,16 @@ async function Layout({ children }: Props) {
       id: true,
     },
   });
-  console.log(userDB);
+
   if (!userDB || !userDB.id) {
     return redirect('/register');
   }
 
-  return <>{children}</>;
+  return (
+    <main>
+      <Header email={userEmail} />
+      {children}
+    </main>
+  );
 }
 export default Layout;

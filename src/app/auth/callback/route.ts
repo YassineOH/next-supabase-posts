@@ -1,4 +1,4 @@
-import { createClient } from '~/utils/supabase/server';
+import { createClient } from '~/lib/supabase/server';
 import { NextResponse } from 'next/server';
 
 export async function GET(request: Request) {
@@ -7,7 +7,6 @@ export async function GET(request: Request) {
   // by the SSR package. It exchanges an auth code for the user's session.
   // https://supabase.com/docs/guides/auth/server-side/nextjs
 
-  console.log('auth =============>')
   const requestUrl = new URL(request.url);
   const code = requestUrl.searchParams.get('code');
 
@@ -16,7 +15,7 @@ export async function GET(request: Request) {
     const supabase = createClient();
     await supabase.auth.exchangeCodeForSession(code);
   }
-  console.log('it should redirect here');
+
   // URL to redirect to after sign up process completes
   return NextResponse.redirect(`${origin}/dashboard`);
 }

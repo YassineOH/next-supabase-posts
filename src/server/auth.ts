@@ -1,7 +1,7 @@
 'use server';
 import { z } from 'zod';
 import { headers } from 'next/headers';
-import { createClient } from '~/utils/supabase/server';
+import { createClient } from '~/lib/supabase/server';
 import { signEmailSchema as schema } from '~/lib/schemas';
 import { redirect } from 'next/navigation';
 
@@ -54,3 +54,30 @@ export const signWithGithubAction = async () => {
 
   return redirect(data.url)
 };
+
+export const signOutAction = async () => {
+  const supabase = createClient()
+
+  const {error} = await supabase.auth.signOut({
+
+  })
+
+  if (error) {
+    console.log('Sign out Error', error)
+  }
+
+  return redirect('/')
+}
+
+
+export const getUser = async () => {
+  const supabase = createClient()
+
+  const user = await supabase.auth.getUser()
+
+  if (user.error || !user.data.user) {
+    return redirect('/login')
+  }
+
+  return user.data.user
+}

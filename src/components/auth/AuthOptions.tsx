@@ -19,6 +19,7 @@ import {
 import { signWithEmailAction } from '~/server/auth';
 
 import { signEmailSchema as schema } from '~/lib/schemas';
+import { cn } from '~/lib/utils';
 
 interface Props {
   message?: string;
@@ -73,6 +74,19 @@ function AuthOptions({ message, type }: Props) {
           </form>
         </Form>
       </div>
+      {message && type && (
+        <div
+          className={cn(
+            'flex w-full items-center justify-center rounded-md p-4',
+            {
+              'bg-red-200': type === 'error',
+              'bg-primary bg-opacity-20': type === 'success',
+            },
+          )}
+        >
+          {message}
+        </div>
+      )}
     </div>
   );
 }

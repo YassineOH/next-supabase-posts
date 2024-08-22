@@ -20,6 +20,7 @@ export const signWithEmailAction = async (data: z.infer<typeof schema>) => {
         })
         const params = new URLSearchParams()
         if (error){
+            console.log(error)
             params.set('message', 'Could not authenticate user')
             params.set('type', 'error')
     

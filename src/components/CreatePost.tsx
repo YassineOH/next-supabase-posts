@@ -1,5 +1,6 @@
 'use client';
 
+import { useState } from 'react';
 import PostForm from './PostForm';
 import { Button } from './ui/button';
 import {
@@ -11,8 +12,9 @@ import {
 } from './ui/dialog';
 
 function CreatePost() {
+  const [open, setOpen] = useState(false);
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <Button variant="secondary">Add post</Button>
       </DialogTrigger>
@@ -20,7 +22,11 @@ function CreatePost() {
         <DialogHeader>
           <DialogTitle>Create Post</DialogTitle>
         </DialogHeader>
-        <PostForm />
+        <PostForm
+          onCloseDialog={() => {
+            setOpen(false);
+          }}
+        />
       </DialogContent>
     </Dialog>
   );

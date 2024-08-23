@@ -39,7 +39,7 @@ function AuthOptions({ message, type }: Props) {
   };
 
   return (
-    <div className="flex min-w-96 flex-col items-stretch justify-start gap-y-8">
+    <div className="flex min-w-96 flex-col items-stretch justify-start gap-y-8 px-10">
       <div>
         <Button
           className="flex w-full items-center justify-center gap-x-6 bg-[#272b30] text-white hover:bg-[#272b30]/90"

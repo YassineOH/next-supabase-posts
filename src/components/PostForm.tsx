@@ -18,7 +18,11 @@ import { Button } from './ui/button';
 import { createPost } from '~/server/actions';
 import { useSession } from './UserProvider';
 
-function PostForm() {
+interface Props {
+  onCloseDialog?: () => void;
+}
+
+function PostForm({ onCloseDialog }: Props) {
   const [session] = useSession();
   const form = useForm<CreatePostType>({
     defaultValues: { content: '', title: '', userId: session.user!.id },
@@ -27,6 +31,9 @@ function PostForm() {
 
   const handleSubmitPost = async (data: CreatePostType) => {
     await createPost(data);
+    if (onCloseDialog) {
+      onCloseDialog();
+    }
   };
 
   return (

@@ -20,3 +20,5 @@ export const createPostSchema = createInsertSchema(postTable, {
 })
 
 export type CreatePostType = z.infer<typeof createPostSchema>
+
+export type PostType = typeof postTable.$inferSelect

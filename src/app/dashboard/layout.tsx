@@ -20,9 +20,7 @@ async function Layout({ children }: Props) {
       id: true,
     },
   });
-  const allUsers = await db.query.userTable.findMany();
-  console.log({ allUsers });
-  console.log({ user });
+
   if (!user || !user.id) {
     return redirect('/register');
   }

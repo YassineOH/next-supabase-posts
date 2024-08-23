@@ -16,7 +16,7 @@ export const userTable = pgTable('users', {
 
 export const postTable = pgTable('posts', {
   id: serial('id').primaryKey(),
-  content: text('content'),
+  content: text('content').notNull(),
   title: varchar('title', { length: 255 }).notNull(),
   createdOn: timestamp('created_on').defaultNow(),
   updatedOn: timestamp('updated_on')
@@ -27,7 +27,3 @@ export const postTable = pgTable('posts', {
   }),
 });
 
-export type InsertUser = typeof userTable.$inferInsert;
-export type SelectUser = typeof userTable.$inferSelect;
-export type InsertPost = typeof postTable.$inferInsert;
-export type SelectPost = typeof postTable.$inferSelect;

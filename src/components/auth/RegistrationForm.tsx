@@ -10,7 +10,7 @@ import {
   FormLabel,
   FormMessage,
 } from '../ui/form';
-import { Card, CardContent, CardTitle } from '../ui/card';
+import { Card, CardContent, CardTitle, CardHeader } from '../ui/card';
 import { z } from 'zod';
 import { registrationFormSchema } from '~/lib/schemas';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -37,7 +37,9 @@ function RegistrationForm({ email, name = '' }: Props) {
   };
   return (
     <Card className="space-y-8 p-4">
-      <CardTitle>Register your account</CardTitle>
+      <CardHeader>
+        <CardTitle>Register your account</CardTitle>
+      </CardHeader>
       <CardContent>
         <Form {...form}>
           <form

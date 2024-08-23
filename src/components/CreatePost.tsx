@@ -16,7 +16,7 @@ function CreatePost() {
       <DialogTrigger asChild>
         <Button variant="secondary">Add post</Button>
       </DialogTrigger>
-      <DialogContent>
+      <DialogContent aria-describedby="post form">
         <DialogHeader>
           <DialogTitle>Create Post</DialogTitle>
         </DialogHeader>

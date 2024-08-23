@@ -15,15 +15,26 @@ import { Input } from './ui/input';
 import { Textarea } from './ui/textarea';
 import { Button } from './ui/button';
 
+import { createPost } from '~/server/actions';
+import { useSession } from './UserProvider';
+
 function PostForm() {
+  const [session] = useSession();
   const form = useForm<CreatePostType>({
-    defaultValues: { content: '', title: '' },
+    defaultValues: { content: '', title: '', userId: session.user!.id },
     resolver: zodResolver(createPostSchema),
-    // mode: 'o',
   });
+
+  const handleSubmitPost = async (data: CreatePostType) => {
+    await createPost(data);
+  };
+
   return (
     <Form {...form}>
-      <form className="space-y-4">
+      <form
+        className="space-y-4"
+        onSubmit={form.handleSubmit(handleSubmitPost)}
+      >
         <FormField
           control={form.control}
           name="title"

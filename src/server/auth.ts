@@ -41,6 +41,7 @@ export const signWithGithubAction = async () => {
     provider: 'github',
     options: {
       redirectTo: `${origin}/auth/callback`,
+
     },
   });
 
@@ -76,8 +77,11 @@ export const getUser = async () => {
   const user = await supabase.auth.getUser()
 
   if (user.error || !user.data.user) {
-    return redirect('/login')
+    return null
   }
 
   return user.data.user
 }
+
+
+export type User =Awaited< ReturnType<typeof getUser>>

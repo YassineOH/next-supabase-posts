@@ -1,14 +1,14 @@
 CREATE TABLE IF NOT EXISTS "posts" (
 	"id" serial PRIMARY KEY NOT NULL,
-	"content" text,
+	"content" text NOT NULL,
 	"title" varchar(255) NOT NULL,
 	"created_on" timestamp DEFAULT now(),
 	"updated_on" timestamp NOT NULL,
-	"user_id" integer
+	"user_id" uuid NOT NULL
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "users" (
-	"id" serial PRIMARY KEY NOT NULL,
+	"id" uuid PRIMARY KEY NOT NULL,
 	"name" varchar(55) NOT NULL,
 	"email" varchar(255) NOT NULL,
 	"registered_on" timestamp DEFAULT now(),

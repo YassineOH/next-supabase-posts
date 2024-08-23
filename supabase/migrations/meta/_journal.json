@@ -5,15 +5,8 @@
     {
       "idx": 0,
       "version": "7",
-      "when": 1724329171692,
-      "tag": "0000_medical_sprite",
-      "breakpoints": true
-    },
-    {
-      "idx": 1,
-      "version": "7",
-      "when": 1724376339392,
-      "tag": "0001_slim_goliath",
+      "when": 1724425154001,
+      "tag": "0000_woozy_sheva_callister",
       "breakpoints": true
     }
   ]

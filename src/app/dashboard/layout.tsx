@@ -2,38 +2,34 @@ import { redirect } from 'next/navigation';
 import { ReactNode } from 'react';
 import Header from '~/components/Header';
 import { db } from '~/db';
-import { createClient } from '~/lib/supabase/server';
+import { getUser } from '~/server/auth';
 
 interface Props {
   children: ReactNode;
 }
 
 async function Layout({ children }: Props) {
-  const supabase = createClient();
-
-  const user = await supabase.auth.getUser();
-  if (user.error || !user.data.user) {
+  const userSession = await getUser();
+  if (!userSession) {
     return redirect('/login');
   }
-  const userEmail = user.data.user.email;
 
-  if (!userEmail) {
-    return redirect('/login');
-  }
-  const userDB = await db.query.userTable.findFirst({
-    where: (u, { eq }) => eq(u.email, userEmail),
+  const user = await db.query.userTable.findFirst({
+    where: (u, { eq }) => eq(u.email, userSession.email!),
     columns: {
       id: true,
     },
   });
-
-  if (!userDB || !userDB.id) {
+  const allUsers = await db.query.userTable.findMany();
+  console.log({ allUsers });
+  console.log({ user });
+  if (!user || !user.id) {
     return redirect('/register');
   }
 
   return (
     <main>
-      <Header email={userEmail} />
+      <Header userSession={userSession} />
       {children}
     </main>
   );

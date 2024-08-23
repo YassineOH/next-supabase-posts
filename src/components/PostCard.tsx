@@ -20,7 +20,6 @@ async function PostCard({ post }: Props) {
   const currentUser = await getUser();
   const canEdit = post.userId === currentUser?.id;
 
-  console.log({ canEdit });
   return (
     <Card>
       <CardHeader className="space-y-2">

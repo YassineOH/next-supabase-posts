@@ -1,8 +1,12 @@
+import { redirect } from 'next/navigation';
 import RegistrationForm from '~/components/auth/RegistrationForm';
 import { getUser } from '~/server/auth';
 
 async function RegisterPage() {
   const user = await getUser();
+  if (!user) {
+    return redirect('/login');
+  }
 
   return (
     <main className="grid h-screen w-screen grid-cols-1 lg:grid-cols-2">

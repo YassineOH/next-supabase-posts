@@ -28,8 +28,8 @@ async function PostCard({ post }: Props) {
           {canEdit ? <EditPost /> : null}
         </div>
         <CardDescription>
-          <p>Posted by: {userInfo?.name}</p>
-          <p>Created On: {format(post.createdOn!, 'PPpp')}</p>
+          Posted by: {userInfo?.name} <br />
+          Created On: {format(post.createdOn!, 'PPpp')}
         </CardDescription>
       </CardHeader>
       <CardContent>{post.content}</CardContent>

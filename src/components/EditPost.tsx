@@ -1,5 +1,6 @@
 'use client';
-
+import { FaEdit } from 'react-icons/fa';
+import { FaTrash } from 'react-icons/fa';
 import { Button } from './ui/button';
 import {
   DropdownMenu,
@@ -19,8 +20,14 @@ function EditPost() {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-10">
-        <DropdownMenuItem>Edit</DropdownMenuItem>
-        <DropdownMenuItem>delete</DropdownMenuItem>
+        <DropdownMenuItem className="flex items-center justify-start gap-x-2">
+          <FaEdit />
+          <div>Edit</div>
+        </DropdownMenuItem>
+        <DropdownMenuItem className="flex items-center justify-start gap-x-2 text-destructive">
+          <FaTrash />
+          <div>delete</div>
+        </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   );

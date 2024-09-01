@@ -3,7 +3,6 @@ import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from './ui/card';
@@ -25,7 +24,13 @@ async function PostCard({ post }: Props) {
       <CardHeader className="space-y-2">
         <div className="flex items-center justify-between">
           <CardTitle>{post.title}</CardTitle>
-          {canEdit ? <EditPost /> : null}
+          {canEdit ? (
+            <EditPost
+              title={post.title}
+              content={post.content}
+              postId={post.id}
+            />
+          ) : null}
         </div>
         <CardDescription>
           Posted by: {userInfo?.name} <br />

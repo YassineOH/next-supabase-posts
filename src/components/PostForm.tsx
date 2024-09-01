@@ -15,22 +15,30 @@ import { Input } from './ui/input';
 import { Textarea } from './ui/textarea';
 import { Button } from './ui/button';
 
-import { createPost } from '~/server/actions';
+import { createPost, updatePost } from '~/server/actions';
 import { useSession } from './UserProvider';
 
 interface Props {
   onCloseDialog?: () => void;
+  content?: string;
+  title?: string;
+  postId?: number;
 }
 
-function PostForm({ onCloseDialog }: Props) {
+function PostForm({ onCloseDialog, content = '', title = '', postId }: Props) {
   const [session] = useSession();
   const form = useForm<CreatePostType>({
-    defaultValues: { content: '', title: '', userId: session.user!.id },
+    defaultValues: { content, title, userId: session.user!.id },
     resolver: zodResolver(createPostSchema),
   });
 
   const handleSubmitPost = async (data: CreatePostType) => {
-    await createPost(data);
+    console.log(data);
+    if (postId) {
+      await updatePost({ ...data, id: postId });
+    } else {
+      await createPost(data);
+    }
     if (onCloseDialog) {
       onCloseDialog();
     }
@@ -71,7 +79,7 @@ function PostForm({ onCloseDialog }: Props) {
           )}
         />
         <Button type="submit" className="w-full">
-          Post
+          {postId ? 'Update' : 'Post'}
         </Button>
       </form>
     </Form>

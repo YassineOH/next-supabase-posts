@@ -29,6 +29,7 @@ async function PostCard({ post }: Props) {
               title={post.title}
               content={post.content}
               postId={post.id}
+              userId={post.userId}
             />
           ) : null}
         </div>
